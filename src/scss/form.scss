@@ -1,0 +1,16 @@
+/** Login Page */
+
+body {
+    // padding-top: 1rem;
+}
+
+.form-main-container {
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.login-form-container,
+.signup-form-container {
+    max-width: 25rem;
+}
