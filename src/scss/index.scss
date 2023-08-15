@@ -104,7 +104,6 @@ body {
 .chat-body {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     gap: 1rem;
     padding: 0 1rem;
     padding-top: 1rem;
@@ -117,6 +116,7 @@ body {
     word-wrap: break-word;
     padding: .5rem 1rem;
     border-radius: 1rem;
+    padding-bottom: 0;
 }
 
 .desktop-chat-scroll {

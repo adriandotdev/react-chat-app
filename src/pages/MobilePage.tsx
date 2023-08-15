@@ -49,6 +49,7 @@ function MobilePage() {
                         <div className="chat-bubble">
                             <p>Hello, Kumusta kana?</p>
                         </div>
+
                     </div>
                 </ScrollToBottom>
                 <div className="d-flex mt-3 mb-2">
