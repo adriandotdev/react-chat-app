@@ -1,0 +1,129 @@
+.chat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: .5rem;
+    border: .5px solid #cccccc42;
+
+    .chat-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+
+        .chat-img {
+            display: none;
+            width: 4rem;
+            border-radius: 50%;
+        }
+
+        .no-photo-replacement {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        .chat-content {
+            display: flex;
+            flex-direction: column;
+
+            .chat-shown {
+                // display: block;
+                max-width: 15rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    .notification {
+        font-weight: 700;
+    }
+}
+
+html,
+body {
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+.chat-navbar {
+    position: fixed;
+    right: 0;
+    left: 0;
+
+}
+
+.main-window-mobile {
+    width: 100%;
+}
+
+.chat-navbar-desktop {
+    position: fixed;
+    width: inherit;
+}
+
+.mobile-content {
+    margin-top: 6rem;
+    height: 100vh;
+    overflow: auto;
+
+    .list {
+        height: 100%;
+    }
+}
+
+.desktop-chat-list {
+    overflow-y: hidden;
+}
+
+.desktop-content {
+    margin-top: 6rem;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.chat-profile {
+    // min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+.chat-desktop-header {
+    background: #ccc;
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 0 1rem;
+    padding-top: 1rem;
+    height: 100vh;
+}
+
+.chat-bubble {
+    background: yellow;
+    max-width: 15rem;
+    word-wrap: break-word;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+}
+
+.desktop-chat-scroll {
+    height: 100vh;
+    overflow: auto;
+}
+
+.other {
+    align-self: flex-end;
+}
