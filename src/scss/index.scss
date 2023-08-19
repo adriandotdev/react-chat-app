@@ -26,11 +26,17 @@
             justify-content: center;
             align-items: center;
             font-size: 1.5rem;
+            background-color: yellow;
+            font-weight: bold;
         }
 
         .chat-content {
             display: flex;
             flex-direction: column;
+
+            .chat-name {
+                font-weight: bold;
+            }
 
             .chat-shown {
                 // display: block;
@@ -38,6 +44,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                color: rgb(139, 139, 1);
             }
         }
     }
@@ -46,8 +53,6 @@
         font-weight: 700;
     }
 }
-
-body {}
 
 .chat-page {
     overflow-y: hidden;
@@ -102,7 +107,10 @@ body {}
 }
 
 .chat-desktop-header {
-    background: #ccc;
+    background: #fcfcfc;
+    color: yellow;
+    text-shadow: 2px 2px black;
+    font-weight: bold;
 }
 
 .chat-body {
@@ -116,12 +124,12 @@ body {}
 }
 
 .chat-bubble {
-    background: yellow;
+
     max-width: 15rem;
     word-wrap: break-word;
     padding: .5rem 1rem;
     border-radius: 1rem;
-    padding-bottom: 0;
+    width: 100%;
 }
 
 .desktop-chat-scroll {
@@ -129,6 +137,17 @@ body {}
     overflow: auto;
 }
 
-.other {
+.you {
     align-self: flex-end;
+    background: rgb(255, 255, 121);
+    width: max-content;
+}
+
+.other {
+    background: yellow;
+    width: max-content;
+}
+
+.replacement {
+    height: 100vh;
 }

@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import '../css/form.css';
+import { ChatContext } from '../App';
 
 function LoginPage() {
+
+    const { setLoggedInUser } = useContext(ChatContext);
 
     const navigate = useNavigate();
 
@@ -23,6 +26,7 @@ function LoginPage() {
 
             if (response.status >= 200) {
                 setIsLoading(() => false);
+                setLoggedInUser(response.data.user);
                 navigate('/chats', { replace: true });
             }
         }
