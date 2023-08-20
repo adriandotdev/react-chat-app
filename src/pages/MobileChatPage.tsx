@@ -56,7 +56,7 @@ function MobileChatPage() {
     return (
         <div className="d-lg-flex chat-profile p-0">
             <div className="px-3 py-2 chat-desktop-header">
-                <NavLink to="/chats"><FaArrowLeft /></NavLink>
+                <NavLink to="/chats"><FaArrowLeft size={25} color="rgb(139, 139, 1)" /></NavLink>
                 <p className='h5 m-0'>{currentChat.givenName}</p>
             </div>
             <ScrollToBottom className="desktop-chat-scroll">
