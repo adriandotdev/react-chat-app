@@ -107,10 +107,22 @@
 }
 
 .chat-desktop-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     background: #fcfcfc;
-    color: yellow;
-    text-shadow: 2px 2px black;
-    font-weight: bold;
+
+    a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    }
+
+    p {
+        color: yellow;
+        text-shadow: 2px 2px black;
+        font-weight: bold;
+    }
 }
 
 .chat-body {
@@ -128,7 +140,7 @@
     max-width: 15rem;
     word-wrap: break-word;
     padding: .5rem 1rem;
-    border-radius: 1rem;
+    border-radius: .8rem;
     width: 100%;
 }
 
