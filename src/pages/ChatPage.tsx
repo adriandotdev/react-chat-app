@@ -3,12 +3,16 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import '../css/index.css';
 import { useContext, useEffect, useState } from 'react';
 import { ChatContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { IoMdSend } from 'react-icons/io';
 
 function ChatPage() {
 
+    const data = useLoaderData();
     const navigate = useNavigate();
-    const { socket, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages, deleteTest } = useContext(ChatContext);
+    const { socket, setLoggedInUser, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages, deleteTest } = useContext(ChatContext);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -23,14 +27,14 @@ function ChatPage() {
         }
 
         connect();
+
+        setLoggedInUser(data.user);
     }, []);
 
     useEffect(() => {
 
         socket.on('new_online_user', (data) => {
 
-            console.log("FROM JOIN ROOM DATA: ");
-            console.log(data);
             setUsers(data);
         })
     }, [socket]);
@@ -39,7 +43,6 @@ function ChatPage() {
 
         socket.on('receive_messages', (data) => {
 
-            console.log("RECEIVED: " + data);
             setMessages(data);
         });
     });
@@ -59,6 +62,10 @@ function ChatPage() {
         setMessage('');
     }
 
+    if (!data) {
+        return <Navigate to="/login" replace={true} />
+    }
+
     return (
 
         <div className="chat-page container-fluid">
@@ -74,7 +81,12 @@ function ChatPage() {
                 <main className="d-lg-none mobile-content col-12">
                     <div className='list'>
                         {
-                            users.map(user => (<ChatListItem key={user._id} name={'Adrian Nads'} chatShown={'Tawag ka ni Mama'} />))
+                            users.map(user => (<ChatListItem click={() => {
+
+                                setCurrentChat(user);
+                                getMessages();
+                                navigate(`/chats/${user._id}`);
+                            }} key={user._id} name={user.givenName} chatShown={'Tawag ka ni Mama'} />))
                         }
                     </div>
                 </main>
@@ -87,16 +99,19 @@ function ChatPage() {
                             <div className="d-flex justify-content-between align-items-center">
                                 <p className="h3">Chat</p>
 
+
                                 {/* Logout */}
                                 <button onClick={() => {
                                     logout();
                                     navigate('/login');
-                                }} className="btn text-danger">Logout</button>
+                                }} className="btn">
+                                    <FaSignOutAlt className="fa-signout" size={25} />
+                                </button>
 
                                 {/* Logout */}
-                                <button onClick={() => {
+                                {/* <button onClick={() => {
                                     deleteTest();
-                                }} className="btn text-danger">Delete Test</button>
+                                }} className="btn text-danger">Delete Test</button> */}
                             </div>
                             <input placeholder="Search Contacts..." type="text" name="" id="" className='form-control' />
                         </div>
@@ -142,9 +157,9 @@ function ChatPage() {
                                     }
                                 </div>
                             </ScrollToBottom>
-                            <div className="d-flex mt-3 mb-2 px-3">
-                                <textarea value={message} onChange={(e) => setMessage(e.target.value)} className='form-control' name="" id="" cols="30" rows="1"></textarea>
-                                <button onClick={sendMessage} className='btn btn-success'>Send</button>
+                            <div className="d-flex mt-3 mb-2 px-3 mt-5">
+                                <textarea placeholder="Type your message here..." value={message} onChange={(e) => setMessage(e.target.value)} className='form-control' name="" id="" rows={1}></textarea>
+                                <button onClick={sendMessage} className='btn'><IoMdSend size={25} color="rgb(139, 139, 1)" /></button>
                             </div>
                         </div>
                         :
@@ -157,4 +172,16 @@ function ChatPage() {
     )
 }
 
+export const VerifyChatPage = async () => {
+
+    try {
+        const response = await axios.post('http://localhost:3001/api/auth/verify', {}, { withCredentials: true });
+
+        return response.data;
+    }
+    catch (err) {
+
+        return null;
+    }
+}
 export default ChatPage

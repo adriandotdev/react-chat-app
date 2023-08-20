@@ -3,6 +3,8 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import { ChatContext } from '../App'
 import useScreenSize from '../hooks/useScreenSize';
 import { NavLink, Navigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa6';
+import { IoMdSend } from 'react-icons/io';
 
 function MobileChatPage() {
 
@@ -54,7 +56,7 @@ function MobileChatPage() {
     return (
         <div className="d-lg-flex chat-profile p-0">
             <div className="px-3 py-2 chat-desktop-header">
-                <NavLink to="/chats">Back</NavLink>
+                <NavLink to="/chats"><FaArrowLeft /></NavLink>
                 <p className='h5 m-0'>{currentChat.givenName}</p>
             </div>
             <ScrollToBottom className="desktop-chat-scroll">
@@ -80,8 +82,10 @@ function MobileChatPage() {
                 </div>
             </ScrollToBottom>
             <div className="d-flex mt-3 mb-2 px-3">
-                <textarea value={message} onChange={(e) => setMessage(e.target.value)} className='form-control' name="" id="" cols="30" rows="1"></textarea>
-                <button onClick={sendMessage} className='btn btn-success'>Send</button>
+                <textarea placeholder='Type your message here...' value={message} onChange={(e) => setMessage(e.target.value)} className='form-control' name="" id="" rows={1}></textarea>
+                <button onClick={sendMessage} className='btn'>
+                    <IoMdSend size={25} color="rgb(139, 139, 1)" />
+                </button>
             </div>
         </div>
     )
