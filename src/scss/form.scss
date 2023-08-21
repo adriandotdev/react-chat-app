@@ -8,3 +8,34 @@
 .signup-form-container {
     max-width: 25rem;
 }
+
+.login-heading {
+    color: yellow;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-shadow: 5px 5px black;
+}
+
+.btn-login {
+    background: yellow;
+    font-weight: 700;
+
+    &:hover {
+        background-color: yellow;
+        box-shadow: 5px 5px 0px black;
+    }
+
+    &:focus-visible:focus {
+        background-color: yellow;
+        box-shadow: 5px 5px 0px black;
+    }
+}
+
+.btn-signup-route {
+    text-decoration: none;
+    color: rgb(139, 139, 1);
+
+    &:hover {
+        color: rgb(139, 139, 1);
+    }
+}
