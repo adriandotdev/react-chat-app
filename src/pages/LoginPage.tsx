@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import '../css/form.css';
-import { ChatContext } from '../App';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useChatContext } from '../contexts/ChatAppContext';
 
 interface ILoginInput {
     username: string,
@@ -14,7 +14,7 @@ function LoginPage() {
 
     const { register, handleSubmit, setError, formState: { errors }, getValues } = useForm<ILoginInput>();
 
-    const { setLoggedInUser } = useContext(ChatContext);
+    const { setLoggedInUser } = useChatContext();
 
     const navigate = useNavigate();
 

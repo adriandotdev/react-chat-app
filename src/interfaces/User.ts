@@ -7,5 +7,5 @@ export default interface User {
     username: string,
     password: string,
     profileImage: string,
-    friends: Array<User>
+    friends: User[]
 }

@@ -7,12 +7,14 @@ import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
-
+import { useChatContext } from '../contexts/ChatAppContext';
 function ChatPage() {
 
     const data = useLoaderData();
     const navigate = useNavigate();
-    const { socket, setLoggedInUser, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages, deleteTest } = useContext(ChatContext);
+    //useContext<ContextType>(ChatContext);
+    const { socket, setLoggedInUser, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages } = useChatContext();
+
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -120,7 +122,7 @@ function ChatPage() {
                     <main className="desktop-content">
                         <div className='list'>
                             {
-                                users.map(user => (<ChatListItem key={user.id} name={user.givenName} click={() => {
+                                users.map(user => (<ChatListItem key={user._id} name={user.givenName} click={() => {
                                     setCurrentChat(user);
                                     getMessages();
                                 }} chatShown={'Tawag ka ni Mama'} />))

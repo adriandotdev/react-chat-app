@@ -1,14 +1,14 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { ChatContext } from '../App'
 import useScreenSize from '../hooks/useScreenSize';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { IoMdSend } from 'react-icons/io';
+import { useChatContext } from '../contexts/ChatAppContext';
 
 function MobileChatPage() {
 
-    const { socket, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages, deleteTest } = useContext(ChatContext);
+    const { socket, loggedInUser, setUsers, currentChat, messages, setMessages } = useChatContext();
     const isMatch = useScreenSize(1024);
 
     const [message, setMessage] = useState('');
@@ -32,7 +32,6 @@ function MobileChatPage() {
 
         socket.on('new_online_user', (data) => {
 
-            console.log("FROM JOIN ROOM DATA: ");
             console.log(data);
             setUsers(data);
         })
@@ -42,14 +41,12 @@ function MobileChatPage() {
 
         socket.on('receive_messages', (data) => {
 
-            console.log("RECEIVED: " + data);
             setMessages(data);
         });
     });
 
     if (isMatch) {
 
-        console.log("NOT MATCHED")
         return <Navigate to="/chats" replace={true} />
     }
 
