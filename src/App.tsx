@@ -6,19 +6,36 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MobileChatPage from './pages/MobileChatPage';
 
-import { VerifyChatPage } from './pages/ChatPage';
+// Private Page
+import PrivatePage from './pages/PrivatePage';
+import { PrivateRouteVerifier } from './pages/PrivatePage';
+
+// Non-Private Page
+import NotPrivatePage from './pages/NotPrivatePage';
+import { NonPrivateRouteVerifier } from './pages/NotPrivatePage';
+
+import { LoggedInUserLoader } from './pages/ChatPage';
 import ChatAppContext from './contexts/ChatAppContext';
 
 const router = createBrowserRouter(
 
   createRoutesFromElements(
     <Route>
-      <Route path="/" index element={<IndexPage />} />
-      <Route path="/login" index element={<LoginPage />} />
-      <Route path="/signup" index element={<RegisterPage />} />
-      <Route path="/chats" element={<ChatPage />} loader={VerifyChatPage} />
-      <Route path="/chats/:id" element={<MobileChatPage />} />
-    </Route>
+
+      {/* Private Routes */}
+      <Route element={<PrivatePage />} loader={PrivateRouteVerifier}>
+        <Route path="/chats" element={<ChatPage />} loader={LoggedInUserLoader} />
+        <Route path="/chats/:id" element={<MobileChatPage />} />
+      </Route>
+
+      {/* Non-Private Routes */}
+      <Route element={<NotPrivatePage />} loader={NonPrivateRouteVerifier} >
+        <Route path="/" index element={<IndexPage />} />
+        <Route path="/login" index element={<LoginPage />} />
+        <Route path="/signup" index element={<RegisterPage />} />
+      </Route>
+
+    </Route >
   )
 );
 
