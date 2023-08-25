@@ -10,12 +10,10 @@ function PrivatePage() {
         return <Outlet />
     }
 
-    return (
-        <Navigate to="/" replace={true} />
-    )
+    return <Navigate to="/" replace={true} />
 }
 
-export const VerifyChatPage = async () => {
+export const PrivateRouteVerifier = async () => {
 
     try {
         const response = await axios.post('http://localhost:3001/api/auth/verify', {}, { withCredentials: true });
