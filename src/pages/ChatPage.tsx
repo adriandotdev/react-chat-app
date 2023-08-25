@@ -1,16 +1,22 @@
 import ChatListItem from '../components/ChatListItem';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useEffect, useState } from 'react';
-import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { useChatContext } from '../contexts/ChatAppContext';
 
+// styles
 import '../scss/index.scss';
+
+// interfaces
+import User from '../interfaces/User';
+
 function ChatPage() {
 
-    const data = useLoaderData();
+    const data = useLoaderData() as User;
+
     const navigate = useNavigate();
     //useContext<ContextType>(ChatContext);
     const { socket, setLoggedInUser, loggedInUser, setUsers, users, logout, setCurrentChat, currentChat, messages, setMessages, getMessages } = useChatContext();
@@ -62,10 +68,6 @@ function ChatPage() {
         await socket.emit('send_message', newMessage);
 
         setMessage('');
-    }
-
-    if (!data) {
-        return <Navigate to="/login" replace={true} />
     }
 
     return (
@@ -174,7 +176,7 @@ function ChatPage() {
     )
 }
 
-export const VerifyChatPage = async () => {
+export const LoggedInUserLoader = async () => {
 
     try {
         const response = await axios.post('http://localhost:3001/api/auth/verify', {}, { withCredentials: true });
