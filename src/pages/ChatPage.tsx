@@ -1,13 +1,13 @@
 import ChatListItem from '../components/ChatListItem';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import '../css/index.css';
-import { useContext, useEffect, useState } from 'react';
-import { ChatContext } from '../App';
+import { useEffect, useState } from 'react';
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { useChatContext } from '../contexts/ChatAppContext';
+
+import '../scss/index.scss';
 function ChatPage() {
 
     const data = useLoaderData();

@@ -110,7 +110,9 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: #fcfcfc;
+    background: white;
+    border-bottom: 1px solid rgb(179, 179, 179);
+    ;
 
     p {
         color: yellow;

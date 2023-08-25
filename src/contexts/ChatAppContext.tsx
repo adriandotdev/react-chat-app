@@ -27,7 +27,7 @@ export function useChatContext() {
     return useContext(ChatContext);
 }
 
-function ChatAppContext({ children }) {
+function ChatAppContext({ children }: { children: React.ReactNode }) {
 
     const [loggedInUser, setLoggedInUser] = useState<User>({
         _id: '',
