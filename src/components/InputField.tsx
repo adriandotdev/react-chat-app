@@ -1,24 +1,30 @@
-import { UseFormRegister } from 'react-hook-form'
-
-interface IRegister {
-    givenName: string,
-    middleName: string,
-    lastName: string,
-    username: string,
-    password: string,
-    confirmPassword: string
-}
+import { RegisterOptions, UseFormRegister, FieldErrors, UseFormGetValues } from 'react-hook-form'
+import IRegister from '../interfaces/IRegister'
 
 type InputFieldProps = {
 
     register: UseFormRegister<IRegister>,
     type: string,
-    id: string
+    id: "givenName" | "middleName" | "lastName" | "username" | "password" | "confirmPassword",
+    options: RegisterOptions,
+    errors: FieldErrors<IRegister>,
+    getValues: UseFormGetValues<IRegister>
 }
 
-function InputField({ register, type, id }: InputFieldProps) {
+function InputField({ register, type, id, options, errors, getValues }: InputFieldProps) {
+
+    console.log(id + " : " + errors[id]?.message)
     return (
-        <input {...register} className="form-control" type={type} name={id} id={id} />
+        <>
+            <input
+                {...register(id, options)}
+                className={`form-control ${errors[id]?.message ? 'is-invalid' : getValues()[id] ? 'is-valid' : ''}`}
+                type={type}
+                name={id}
+                id={id}
+            />
+            {errors[id]?.message && <small className="text-danger fw-bold">{errors[id]?.message}</small>}
+        </>
     )
 }
 
